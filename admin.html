@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Orders | SkyThrill</title>
+    <link rel="stylesheet" href="styles/main.css" />
+    <script defer src="scripts/admin.js"></script>
+  </head>
+  <body>
+    <div class="cloud-layer" aria-hidden="true">
+      <div class="cloud cloud-a"></div>
+      <div class="cloud cloud-b"></div>
+      <div class="cloud cloud-c"></div>
+      <div class="cloud cloud-d"></div>
+    </div>
+    <main>
+      <section class="hero reveal">
+        <p class="eyebrow">Admin</p>
+        <h1>Voucher fulfillment dashboard</h1>
+        <p class="hero-copy">
+          Review paid orders, verify fulfillment status, and resend voucher emails.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-ghost" href="index.html">Back to storefront</a>
+        </div>
+      </section>
+
+      <section class="section reveal admin-panel">
+        <div class="admin-toolbar">
+          <label for="admin-key">Admin API key (if enabled)</label>
+          <input id="admin-key" type="password" placeholder="Enter admin key" autocomplete="off" />
+          <button id="save-admin-key" class="btn" type="button">Save key</button>
+          <button id="refresh-orders" class="btn btn-ghost" type="button">Refresh orders</button>
+        </div>
+        <div class="admin-filters">
+          <label>
+            Payment status
+            <select id="payment-filter">
+              <option value="all">All</option>
+              <option value="paid">Paid</option>
+              <option value="created">Created</option>
+              <option value="failed">Failed</option>
+              <option value="expired">Expired</option>
+            </select>
+          </label>
+          <label>
+            Fulfillment status
+            <select id="fulfillment-filter">
+              <option value="all">All</option>
+              <option value="emailed">Emailed</option>
+              <option value="generated">Generated only</option>
+              <option value="error">Error</option>
+              <option value="pending-email">Pending email</option>
+              <option value="email-missing">Email missing</option>
+            </select>
+          </label>
+          <label>
+            Search
+            <input id="order-search" type="search" placeholder="Session ID or customer email" autocomplete="off" />
+          </label>
+        </div>
+        <p id="admin-status" aria-live="polite">Loading orders...</p>
+        <div id="orders-grid" class="orders-grid"></div>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SkyThrill Vouchers</title>
+    <meta
+      name="description"
+      content="Gift unforgettable air adventures with SkyThrill vouchers for pleasure flights, skydiving, wingwalking, hot air balloon rides, gliding, and aerobatics."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Syne:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/main.css" />
+    <script defer src="scripts/main.js"></script>
+    <script>
+      // Pre-select form fields from query params (set by wingwalking Select buttons)
+      document.addEventListener('DOMContentLoaded', function () {
+        var params = new URLSearchParams(window.location.search);
+        var activity = params.get('activity');
+        var amount = params.get('amount');
+
+        if (activity) {
+          var sel = document.querySelector('select[name="activity"]');
+          if (sel) {
+            var opt = Array.from(sel.options).find(function (o) { return o.value === activity; });
+            if (opt) { sel.value = opt.value; }
+          }
+        }
+
+        if (amount) {
+          var amountSel = document.querySelector('select[name="amount"]');
+          if (amountSel) {
+            var amountOpt = Array.from(amountSel.options).find(function (o) { return o.value === amount; });
+            if (amountOpt) { amountSel.value = amountOpt.value; }
+          }
+        }
+
+        // Scroll to form whenever prefill params are present
+        if (activity || amount) {
+          var form = document.getElementById('voucher-form');
+          if (form) { form.scrollIntoView({ behavior: 'smooth' }); }
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <div class="bg-orb orb-a"></div>
+    <div class="bg-orb orb-b"></div>
+    <div class="cloud-layer" aria-hidden="true">
+      <div class="cloud cloud-a"></div>
+      <div class="cloud cloud-b"></div>
+      <div class="cloud cloud-c"></div>
+      <div class="cloud cloud-d"></div>
+    </div>
+
+    <header class="site-header">
+      <a class="brand" href="index.html">SkyThrill</a>
+      <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav">
+        Menu
+      </button>
+      <nav id="main-nav" class="main-nav" aria-label="Primary navigation">
+        <a href="#experiences">Experiences</a>
+        <a href="#featured">Featured</a>
+        <a href="#how-it-works">How it works</a>
+        <a class="btn btn-sm" href="#voucher-form">Buy voucher</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero reveal">
+        <p class="eyebrow">Gift altitude. Gift adrenaline.</p>
+        <h1>Vouchers for unforgettable sky adventures.</h1>
+        <p class="hero-copy">
+          Choose from pleasure flights, tandem skydives, wingwalking, hot air balloon rides,
+          gliding, and aerobatics experiences. Digital delivery in minutes. Valid for 12 months.
+        </p>
+        <div class="hero-actions">
+          <a class="btn" href="#voucher-form">Build a voucher</a>
+          <a class="btn btn-ghost" href="#experiences">Browse activities</a>
+        </div>
+      </section>
+
+      <section id="experiences" class="section reveal">
+        <div class="section-header">
+          <h2>Choose the thrill</h2>
+          <p>Six routes to the same destination: pure excitement.</p>
+        </div>
+        <div class="experience-grid">
+          <article class="card">
+            <h3>Pleasure Flights</h3>
+            <p>Scenic and aerobatic routes with pro pilots.</p>
+            <a href="pages/pleasure-flights.html">View pleasure flight vouchers</a>
+          </article>
+          <article class="card">
+            <h3>Skydiving</h3>
+            <p>Tandem jumps from 10,000ft to 15,000ft with certified instructors.</p>
+            <a href="pages/skydiving.html">View skydiving vouchers</a>
+          </article>
+          <article class="card card--photo">
+            <img
+              src="images/gedii.png"
+              alt="Wingwalker on the wing of the Ethel Dares G-EDII biplane"
+              class="card-thumb"
+            />
+            <h3>Wingwalking</h3>
+            <p>Stand on a classic aircraft wing and own the skyline.</p>
+            <a href="pages/wingwalking.html">View wingwalking vouchers</a>
+          </article>
+          <article class="card">
+            <h3>Hot Air Balloon Rides</h3>
+            <p>Drift above the countryside with sunrise and sunset balloon flights.</p>
+            <a href="pages/hot-air-balloon-rides.html">View balloon ride vouchers</a>
+          </article>
+          <article class="card">
+            <h3>Gliding</h3>
+            <p>Silent soaring sessions with experienced glider instructors.</p>
+            <a href="pages/gliding.html">View gliding vouchers</a>
+          </article>
+          <article class="card">
+            <h3>Aerobatics</h3>
+            <p>High-energy loops, rolls, and precision maneuvers with expert pilots.</p>
+            <a href="pages/aerobatics.html">View aerobatics vouchers</a>
+          </article>
+        </div>
+      </section>
+
+      <section id="featured" class="section reveal">
+        <div class="section-header">
+          <h2>Featured bundles</h2>
+          <p>Popular gifts selected by recent customers.</p>
+        </div>
+        <div class="bundle-grid">
+          <article class="bundle">
+            <p class="bundle-tag">Top seller</p>
+            <h3>Golden Hour Flight</h3>
+            <p>45-minute sunset route for one with HD photo pack.</p>
+            <p class="price">GBP 149</p>
+          </article>
+          <article class="bundle">
+            <p class="bundle-tag">Adrenaline</p>
+            <h3>Altitude Drop</h3>
+            <p>12,000ft tandem jump with priority weekend slot.</p>
+            <p class="price">GBP 279</p>
+          </article>
+          <article class="bundle">
+            <p class="bundle-tag">Iconic</p>
+            <h3>Wingwalker Prime</h3>
+            <p>Full wingwalking briefing, flight, and celebration package.</p>
+            <p class="price">GBP 399</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="how-it-works" class="section how-it-works reveal">
+        <div class="section-header">
+          <h2>How vouchers work</h2>
+        </div>
+        <div class="steps">
+          <article>
+            <span>1</span>
+            <h3>Pick an experience</h3>
+            <p>Choose pleasure flights, skydiving, wingwalking, balloon rides, gliding, aerobatics, or a mixed gift card.</p>
+          </article>
+          <article>
+            <span>2</span>
+            <h3>Personalize it</h3>
+            <p>Add a message and recipient details for email or printable delivery.</p>
+          </article>
+          <article>
+            <span>3</span>
+            <h3>Send instantly</h3>
+            <p>Recipient books a date later using a simple voucher code.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="voucher-form" class="section voucher-form reveal">
+        <div class="section-header">
+          <h2>Start your voucher</h2>
+        </div>
+        <form id="voucher-checkout-form">
+          <label>
+            Activity
+            <select name="activity">
+              <option value="Pleasure Flight">Pleasure Flight</option>
+              <option value="Tandem Skydive">Tandem Skydive</option>
+              <option value="Standard WingWalk">Standard WingWalk</option>
+              <option value="Dynamic WingWalk">Dynamic WingWalk</option>
+              <option value="Aerobatic WingWalk">Aerobatic WingWalk</option>
+              <option value="Duxford WingWalk">Duxford WingWalk</option>
+              <option value="Charity WingWalk">Charity WingWalk</option>
+              <option value="Leeds East WingWalk">Leeds East WingWalk</option>
+              <option value="Sandown IOW WingWalk">Sandown IOW WingWalk</option>
+              <option value="Hot Air Balloon Ride">Hot Air Balloon Ride</option>
+              <option value="Gliding Session">Gliding Session</option>
+              <option value="Aerobatics Experience">Aerobatics Experience</option>
+              <option value="Flexible Gift Card">Flexible Gift Card</option>
+            </select>
+          </label>
+          <label>
+            Voucher value
+            <select name="amount">
+              <option value="10000">GBP 100</option>
+              <option value="15000">GBP 150</option>
+              <option value="25000">GBP 250</option>
+              <option value="40000">GBP 400</option>
+              <option value="43900">GBP 439 (Duxford)</option>
+            </select>
+          </label>
+          <label>
+            Your email
+            <input type="email" name="customerEmail" placeholder="you@example.com" required />
+          </label>
+          <label>
+            Recipient name
+            <input type="text" name="recipient" placeholder="Alex Morgan" />
+          </label>
+          <label>
+            Your message
+            <textarea name="message" rows="4" placeholder="Enjoy every second up there."></textarea>
+          </label>
+          <button id="checkout-button" type="submit" class="btn">Continue to secure payment</button>
+          <p id="checkout-status" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>SkyThrill Vouchers</p>
+      <p>Support: support@skythrill.example</p>
+    </footer>
+  </body>
+</html>

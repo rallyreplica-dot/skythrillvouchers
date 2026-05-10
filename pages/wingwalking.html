@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wingwalking Vouchers | SkyThrill</title>
+    <link rel="stylesheet" href="../styles/main.css" />
+    <style>
+      /* Ethel Dares header logo */
+      .ethel-logo {
+        height: 52px;
+        width: auto;
+        border-radius: 6px;
+        display: block;
+      }
+
+      /* Hero override — dark red accent to echo the logo */
+      .ww-hero {
+        background: linear-gradient(135deg, rgba(180,20,20,0.18) 0%, rgba(11,53,88,0.55) 100%);
+        border: 1px solid rgba(220,38,38,0.25);
+      }
+
+      /* Large logo lockup inside hero */
+      .ww-hero-logo {
+        margin-bottom: 1.5rem;
+      }
+      .ww-hero-logo img {
+        max-width: min(420px, 90vw);
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 8px 32px rgba(180,20,20,0.35);
+      }
+      /* Hero split layout */
+      .ww-hero {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 2rem;
+        text-align: left;
+      }
+      .ww-hero-content {
+        flex: 1 1 300px;
+      }
+      .ww-hero-image {
+        flex: 1 1 320px;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 12px 40px rgba(180,20,20,0.32), 0 2px 8px rgba(0,0,0,0.18);
+      }
+      .ww-hero-image img {
+        width: 100%;
+        height: auto;
+        display: block;
+        transition: transform 0.6s ease;
+      }
+      .ww-hero-image:hover img {
+        transform: scale(1.03);
+      }
+      @media (max-width: 700px) {
+        .ww-hero { text-align: center; }
+        .ww-hero .hero-actions { justify-content: center; }
+      }
+      .btn-select {
+        display: inline-block;
+        margin-top: 1rem;
+        font-size: 0.85rem;
+        padding: 0.45rem 1.1rem;
+        background: #b91c1c;
+        color: #fff;
+        border-radius: 999px;
+        font-weight: 700;
+        text-decoration: none;
+        transition: background 0.2s, transform 0.15s;
+      }
+      .btn-select:hover {
+        background: #991b1b;
+        transform: translateY(-2px);
+      }
+      .price-note {
+        font-size: 0.75rem;
+        font-weight: 400;
+        opacity: 0.75;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg-orb orb-a"></div>
+    <div class="bg-orb orb-b"></div>
+    <div class="cloud-layer" aria-hidden="true">
+      <div class="cloud cloud-a"></div>
+      <div class="cloud cloud-b"></div>
+      <div class="cloud cloud-c"></div>
+      <div class="cloud cloud-d"></div>
+    </div>
+
+    <header class="site-header">
+      <div class="header-inner">
+        <a href="../index.html">
+          <img
+            src="../images/ethel-dares-logo.png"
+            alt="Ethel Dares Wingwalking"
+            class="ethel-logo"
+          />
+        </a>
+        <nav>
+          <a href="#wingwalking-packages">Packages</a>
+          <a href="../index.html#voucher-form" class="btn btn-sm">Buy a voucher</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero ww-hero reveal">
+        <div class="ww-hero-content">
+          <div class="ww-hero-logo">
+            <img
+              src="../images/ethel-dares-logo.png"
+              alt="Ethel Dares Wingwalking"
+            />
+          </div>
+          <h1>Wingwalking vouchers for fearless flyers</h1>
+          <p class="hero-copy">
+            Give a bold gift with guided wingwalking experience packages and certified
+            pre-flight support.
+          </p>
+          <div class="hero-actions">
+            <a class="btn" href="#wingwalking-packages">View packages</a>
+            <a class="btn btn-ghost" href="../index.html">Back to home</a>
+          </div>
+        </div>
+        <div class="ww-hero-image">
+          <img
+            src="../images/gedii.png"
+            alt="Wingwalker on the wing of the Ethel Dares G-EDII biplane in flight"
+          />
+        </div>
+      </section>
+
+      <section id="wingwalking-packages" class="section reveal">
+        <div class="section-header">
+          <h2>WingWalk Experiences</h2>
+          <p>Choose the experience that suits your recipient.</p>
+        </div>
+        <div class="bundle-grid bundle-grid--ww">
+          <article class="bundle">
+            <p class="bundle-tag">Classic</p>
+            <h3>Standard WingWalk</h3>
+            <p>Safety briefing, harnessed wing platform flight, and digital certificate.</p>
+            <a class="btn btn-select" href="../index.html?activity=Standard+WingWalk&amount=43900#voucher-form">Select</a>
+          </article>
+          <article class="bundle">
+            <p class="bundle-tag">Most popular</p>
+            <h3>Dynamic WingWalk</h3>
+            <p>More adventurous flight profile with rolls and high-speed passes.</p>
+            <a class="btn btn-select" href="../index.html?activity=Dynamic+WingWalk&amount=43900#voucher-form">Select</a>
+          </article>
+          <article class="bundle">
+            <p class="bundle-tag">Thrill</p>
+            <h3>Aerobatic WingWalk</h3>
+            <p>Full aerobatic sequence on the wing — the ultimate wingwalk experience.</p>
+            <a class="btn btn-select" href="../index.html?activity=Aerobatic+WingWalk&amount=43900#voucher-form">Select</a>
+          </article>
+          <article class="bundle">
+            <p class="bundle-tag">Venue</p>
+            <h3>Duxford WingWalk</h3>
+            <p>Fly from the iconic IWM Duxford airfield. Choose the <strong>Duxford WingWalk Experience</strong> or step it up with the <strong>Duxford Aerobatic WingWalk Experience</strong>.</p>
+            <p class="price">From £439 <span class="price-note">inc. VAT</span></p>
+            <a class="btn btn-select" href="../index.html?activity=Duxford+WingWalk&amount=43900#voucher-form">Select</a>
+          </article>
+          <article class="bundle">
+            <p class="bundle-tag">Give back</p>
+            <h3>Charity WingWalk</h3>
+            <p>Sponsor a wingwalk in aid of your chosen charity with full support pack.</p>
+            <a class="btn btn-select" href="../index.html?activity=Charity+WingWalk&amount=43900#voucher-form">Select</a>
+          </article>
+          <article class="bundle">
+            <p class="bundle-tag">Venue</p>
+            <h3>Leeds East WingWalk</h3>
+            <p>Take to the skies from Leeds East Airport with stunning Yorkshire views.</p>
+            <a class="btn btn-select" href="../index.html?activity=Leeds+East+WingWalk&amount=43900#voucher-form">Select</a>
+          </article>
+          <article class="bundle">
+            <p class="bundle-tag">Venue</p>
+            <h3>Sandown IOW WingWalk</h3>
+            <p>Fly from Sandown Airport on the Isle of Wight for a coastal wingwalk adventure.</p>
+            <a class="btn btn-select" href="../index.html?activity=Sandown+IOW+WingWalk&amount=43900#voucher-form">Select</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-header">
+          <h2>What is included</h2>
+        </div>
+        <div class="steps">
+          <article>
+            <span>1</span>
+            <h3>Ground briefing</h3>
+            <p>One-to-one prep with harness checks and weather-based safety planning.</p>
+          </article>
+          <article>
+            <span>2</span>
+            <h3>Wingwalk flight</h3>
+            <p>Secure wing platform experience with a professional display pilot.</p>
+          </article>
+          <article>
+            <span>3</span>
+            <h3>Share the moment</h3>
+            <p>Voucher holder receives a digital completion certificate and media options.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section voucher-cta reveal">
+        <div class="cta-panel">
+          <h2>Ready to gift a wingwalking voucher?</h2>
+          <p>
+            Purchase now and send instantly, or schedule delivery for a special date.
+          </p>
+          <a class="btn" href="../index.html#voucher-form">Build this voucher</a>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
