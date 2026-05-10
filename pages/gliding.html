@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gliding Vouchers | SkyThrill</title>
     <link rel="stylesheet" href="../styles/main.css" />
+    <script defer src="../scripts/category-date.js"></script>
   </head>
   <body>
     <div class="cloud-layer" aria-hidden="true">
@@ -18,6 +19,24 @@
         <h1>Gliding vouchers for pure, engine-free flight</h1>
         <p>Share a smooth soaring experience guided by trained instructors.</p>
         <a class="btn" href="../index.html">Back to home</a>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-header">
+          <h2>Choose your gliding experience</h2>
+          <p>Select your package and preferred date, then continue to checkout.</p>
+        </div>
+        <div class="experience-grid">
+          <article class="card">
+            <h3>Gliding Session</h3>
+            <p>Engine-free soaring with an experienced glider instructor.</p>
+            <label class="option-date-picker">
+              Preferred date
+              <input data-option-date type="date" />
+            </label>
+            <a data-activity-link="Gliding Session" href="../index.html?activity=Gliding%20Session#voucher-form">Select Gliding Session</a>
+          </article>
+        </div>
       </section>
     </main>
   </body>

@@ -15,6 +15,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles/main.css" />
+    <script defer src="scripts/availability.js"></script>
     <script defer src="scripts/main.js"></script>
     <script>
       // Pre-select form fields from query params (set by wingwalking Select buttons)
@@ -22,6 +23,7 @@
         var params = new URLSearchParams(window.location.search);
         var activity = params.get('activity');
         var amount = params.get('amount');
+        var preferredDate = params.get('preferredDate');
 
         if (activity) {
           var sel = document.querySelector('select[name="activity"]');
@@ -39,8 +41,15 @@
           }
         }
 
+        if (preferredDate) {
+          var dateInput = document.querySelector('input[name="preferredDate"]');
+          if (dateInput) {
+            dateInput.value = preferredDate;
+          }
+        }
+
         // Scroll to form whenever prefill params are present
-        if (activity || amount) {
+        if (activity || amount || preferredDate) {
           var form = document.getElementById('voucher-form');
           if (form) { form.scrollIntoView({ behavior: 'smooth' }); }
         }
@@ -92,7 +101,7 @@
         <div class="experience-grid">
           <article class="card">
             <h3>Pleasure Flights</h3>
-            <p>Scenic and aerobatic routes with pro pilots.</p>
+            <p>Scenic routes with pro pilots.</p>
             <a href="pages/pleasure-flights.html">View pleasure flight vouchers</a>
           </article>
           <article class="card">
@@ -186,7 +195,9 @@
           <label>
             Activity
             <select name="activity">
-              <option value="Pleasure Flight">Pleasure Flight</option>
+              <option value="Fixed Wing Pleasure Flight">Fixed Wing Pleasure Flight</option>
+              <option value="Helicopter Pleasure Flight">Helicopter Pleasure Flight</option>
+              <option value="Microlight Pleasure Flight">Microlight Pleasure Flight</option>
               <option value="Tandem Skydive">Tandem Skydive</option>
               <option value="Standard WingWalk">Standard WingWalk</option>
               <option value="Dynamic WingWalk">Dynamic WingWalk</option>
@@ -211,6 +222,28 @@
               <option value="43900">GBP 439 (Duxford)</option>
             </select>
           </label>
+          <label>
+            Preferred date
+            <input type="date" name="preferredDate" required />
+          </label>
+          <div class="inline-calendar" id="preferred-date-calendar" aria-label="Preferred date calendar">
+            <div class="inline-calendar__header">
+              <button type="button" class="inline-calendar__nav" data-calendar-nav="prev" aria-label="Previous month">&lt;</button>
+              <p class="inline-calendar__title" id="calendar-month-label">Month Year</p>
+              <button type="button" class="inline-calendar__nav" data-calendar-nav="next" aria-label="Next month">&gt;</button>
+            </div>
+            <div class="inline-calendar__weekdays" aria-hidden="true">
+              <span>Mon</span>
+              <span>Tue</span>
+              <span>Wed</span>
+              <span>Thu</span>
+              <span>Fri</span>
+              <span>Sat</span>
+              <span>Sun</span>
+            </div>
+            <div class="inline-calendar__days" id="calendar-day-grid" role="grid" aria-labelledby="calendar-month-label"></div>
+          </div>
+          <p class="calendar-legend"><span class="legend-swatch legend-available"></span> Available &nbsp; <span class="legend-swatch legend-unavailable"></span> Unavailable for this activity</p>
           <label>
             Your email
             <input type="email" name="customerEmail" placeholder="you@example.com" required />

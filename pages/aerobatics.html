@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Aerobatics Vouchers | SkyThrill</title>
     <link rel="stylesheet" href="../styles/main.css" />
+    <script defer src="../scripts/category-date.js"></script>
   </head>
   <body>
     <div class="cloud-layer" aria-hidden="true">
@@ -21,6 +22,24 @@
           with certified aerobatic pilots.
         </p>
         <a class="btn" href="../index.html">Back to home</a>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-header">
+          <h2>Choose your aerobatics experience</h2>
+          <p>Select your package and preferred date, then continue to checkout.</p>
+        </div>
+        <div class="experience-grid">
+          <article class="card">
+            <h3>Aerobatics Experience</h3>
+            <p>Loops, rolls, and high-G maneuvers with a certified aerobatic pilot.</p>
+            <label class="option-date-picker">
+              Preferred date
+              <input data-option-date type="date" />
+            </label>
+            <a data-activity-link="Aerobatics Experience" href="../index.html?activity=Aerobatics%20Experience#voucher-form">Select Aerobatics Experience</a>
+          </article>
+        </div>
       </section>
     </main>
   </body>

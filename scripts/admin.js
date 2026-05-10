@@ -62,6 +62,7 @@ function orderCardTemplate(order) {
       <p><strong>Session:</strong> ${order.sessionId || 'n/a'}</p>
       <p><strong>Status:</strong> ${order.status || 'unknown'} / ${order.fulfillmentStatus || 'n/a'}</p>
       <p><strong>Amount:</strong> ${formatAmount(order.amountTotal, order.currency)}</p>
+      <p><strong>Preferred date:</strong> ${order.preferredDate || 'n/a'}</p>
       <p><strong>Customer:</strong> ${order.customerEmail || 'n/a'}</p>
       <p><strong>Recipient:</strong> ${order.recipient || 'n/a'}</p>
       <p><strong>Voucher code:</strong> ${order.voucherCode || 'not generated'}</p>

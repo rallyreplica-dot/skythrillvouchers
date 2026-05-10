@@ -89,7 +89,7 @@ function formatCurrencyFromMinorUnits(amount, currency) {
   }).format(numericAmount);
 }
 
-async function sendVoucherEmail({ customerEmail, recipient, activity, voucherCode, amountTotal, currency }) {
+async function sendVoucherEmail({ customerEmail, recipient, activity, preferredDate, voucherCode, amountTotal, currency }) {
   if (!mailTransporter || !customerEmail) {
     return { sent: false };
   }
@@ -105,6 +105,7 @@ async function sendVoucherEmail({ customerEmail, recipient, activity, voucherCod
       'Thanks for your SkyThrill purchase.',
       '',
       `Activity: ${activity}`,
+      `Preferred date: ${preferredDate || 'Not selected'}`,
       `Voucher value: ${formattedAmount}`,
       `Recipient: ${recipientLabel}`,
       `Voucher code: ${voucherCode}`,
@@ -135,6 +136,7 @@ async function fulfillCheckoutSession(session) {
   const customerEmail = session.customer_details?.email || session.customer_email || existingOrder.customerEmail || '';
   const recipient = session.metadata?.recipient || existingOrder.recipient || '';
   const activity = session.metadata?.activity || existingOrder.activity || 'SkyThrill Voucher';
+  const preferredDate = session.metadata?.preferredDate || existingOrder.preferredDate || '';
   const amountTotal = session.amount_total ?? existingOrder.amountTotal ?? 0;
   const currency = session.currency || existingOrder.currency || 'gbp';
   const alreadyEmailed = Boolean(existingOrder.fulfillmentEmailSentAt);
@@ -143,6 +145,7 @@ async function fulfillCheckoutSession(session) {
     status: 'paid',
     paymentStatus: session.payment_status,
     activity,
+    preferredDate,
     recipient,
     message: session.metadata?.message || existingOrder.message || '',
     customerEmail,
@@ -157,6 +160,7 @@ async function fulfillCheckoutSession(session) {
       customerEmail,
       recipient,
       activity,
+      preferredDate,
       voucherCode,
       amountTotal,
       currency,
@@ -246,6 +250,7 @@ app.post('/create-checkout-session', async (req, res) => {
     const {
       activity,
       amount,
+      preferredDate,
       recipient,
       message,
       customerEmail,
@@ -253,7 +258,7 @@ app.post('/create-checkout-session', async (req, res) => {
 
     const amountInPence = Number(amount);
 
-    if (!activity || !allowedAmounts.has(amountInPence)) {
+    if (!activity || !preferredDate || !allowedAmounts.has(amountInPence)) {
       return res.status(400).json({ error: 'Invalid checkout payload.' });
     }
 
@@ -283,6 +288,7 @@ app.post('/create-checkout-session', async (req, res) => {
       ],
       metadata: {
         activity,
+        preferredDate: preferredDate || '',
         recipient: recipient || '',
         message: message || '',
       },
@@ -292,6 +298,7 @@ app.post('/create-checkout-session', async (req, res) => {
       status: 'created',
       paymentStatus: session.payment_status || 'unpaid',
       activity,
+      preferredDate: preferredDate || '',
       recipient: recipient || '',
       message: message || '',
       customerEmail: customerEmail || '',

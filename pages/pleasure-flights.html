@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pleasure Flight Vouchers | SkyThrill</title>
     <link rel="stylesheet" href="../styles/main.css" />
+    <script defer src="../scripts/category-date.js"></script>
   </head>
   <body>
     <div class="cloud-layer" aria-hidden="true">
@@ -16,8 +17,44 @@
       <section class="hero reveal">
         <p class="eyebrow">Pleasure Flights</p>
         <h1>Pleasure flight vouchers for sky lovers</h1>
-        <p>Select scenic, aerobatic, and private route gift vouchers.</p>
+        <p>Pick a flight style: fixed wing, helicopter, or microlight.</p>
         <a class="btn" href="../index.html">Back to home</a>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-header">
+          <h2>Choose your aircraft</h2>
+          <p>All three options are available as gift vouchers with flexible booking dates.</p>
+        </div>
+        <div class="experience-grid">
+          <article class="card">
+            <h3>Fixed Wing</h3>
+            <p>Classic scenic routes in light aircraft with panoramic views.</p>
+            <label class="option-date-picker">
+              Preferred date
+              <input data-option-date type="date" />
+            </label>
+            <a data-activity-link="Fixed Wing Pleasure Flight" href="../index.html?activity=Fixed%20Wing%20Pleasure%20Flight#voucher-form">Select fixed wing</a>
+          </article>
+          <article class="card">
+            <h3>Helicopters</h3>
+            <p>Hover and city/coastline tours with vertical takeoff excitement.</p>
+            <label class="option-date-picker">
+              Preferred date
+              <input data-option-date type="date" />
+            </label>
+            <a data-activity-link="Helicopter Pleasure Flight" href="../index.html?activity=Helicopter%20Pleasure%20Flight#voucher-form">Select helicopter</a>
+          </article>
+          <article class="card">
+            <h3>Microlights</h3>
+            <p>Open-air style flying with incredible visibility and a sporty feel.</p>
+            <label class="option-date-picker">
+              Preferred date
+              <input data-option-date type="date" />
+            </label>
+            <a data-activity-link="Microlight Pleasure Flight" href="../index.html?activity=Microlight%20Pleasure%20Flight#voucher-form">Select microlight</a>
+          </article>
+        </div>
       </section>
     </main>
   </body>

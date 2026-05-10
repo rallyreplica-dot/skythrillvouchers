@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Skydiving Vouchers | SkyThrill</title>
     <link rel="stylesheet" href="../styles/main.css" />
+    <script defer src="../scripts/category-date.js"></script>
   </head>
   <body>
     <div class="cloud-layer" aria-hidden="true">
@@ -18,6 +19,24 @@
         <h1>Skydiving vouchers for ultimate adrenaline</h1>
         <p>Tandem and premium drop packages with flexible booking.</p>
         <a class="btn" href="../index.html">Back to home</a>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-header">
+          <h2>Choose your skydiving experience</h2>
+          <p>Select your package and preferred date, then continue to checkout.</p>
+        </div>
+        <div class="experience-grid">
+          <article class="card">
+            <h3>Tandem Skydive</h3>
+            <p>A high-adrenaline tandem jump with full instructor support.</p>
+            <label class="option-date-picker">
+              Preferred date
+              <input data-option-date type="date" />
+            </label>
+            <a data-activity-link="Tandem Skydive" href="../index.html?activity=Tandem%20Skydive#voucher-form">Select Tandem Skydive</a>
+          </article>
+        </div>
       </section>
     </main>
   </body>
