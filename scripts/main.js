@@ -11,6 +11,17 @@ const calendarMonthLabel = document.querySelector('#calendar-month-label');
 const calendarDayGrid = document.querySelector('#calendar-day-grid');
 const calendarPrevButton = document.querySelector('[data-calendar-nav="prev"]');
 const calendarNextButton = document.querySelector('[data-calendar-nav="next"]');
+const pageParams = new URLSearchParams(window.location.search);
+
+const activityAmountMap = {
+  'Standard WingWalk': '43900',
+  'Dynamic WingWalk': '43900',
+  'Aerobatic WingWalk': '43900',
+  'Duxford WingWalk': '43900',
+  'Charity WingWalk': '43900',
+  'Leeds East WingWalk': '43900',
+  'Sandown IOW WingWalk': '43900',
+};
 
 let appConfig = { demoMode: false };
 
@@ -50,7 +61,10 @@ function addDemoBanner() {
 }
 
 function toIsoDate(value) {
-  return value.toISOString().slice(0, 10);
+  const year = value.getFullYear();
+  const month = String(value.getMonth() + 1).padStart(2, '0');
+  const day = String(value.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
 }
 
 function parseIsoDate(value) {
@@ -101,10 +115,42 @@ if (menuButton && nav) {
 }
 
 if (checkoutForm && checkoutButton && checkoutStatus) {
+  const activitySelect = checkoutForm.querySelector('select[name="activity"]');
+  const amountSelect = checkoutForm.querySelector('select[name="amount"]');
+
+  function syncAmountForActivity(options = {}) {
+    if (!(activitySelect instanceof HTMLSelectElement) || !(amountSelect instanceof HTMLSelectElement)) {
+      return;
+    }
+
+    const force = Boolean(options.force);
+    const mappedAmount = activityAmountMap[activitySelect.value];
+    if (!mappedAmount) {
+      return;
+    }
+
+    if (!force && pageParams.has('amount')) {
+      return;
+    }
+
+    const hasOption = Array.from(amountSelect.options).some((option) => option.value === mappedAmount);
+    if (hasOption) {
+      amountSelect.value = mappedAmount;
+    }
+  }
+
+  if (activitySelect instanceof HTMLSelectElement) {
+    activitySelect.addEventListener('change', () => {
+      syncAmountForActivity({ force: true });
+    });
+  }
+
+  syncAmountForActivity({ force: false });
+
   if (preferredDateInput) {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    preferredDateInput.min = today.toISOString().slice(0, 10);
+    preferredDateInput.min = toIsoDate(today);
 
     const storedDate = localStorage.getItem('skythrill_preferred_date');
     if (storedDate && !preferredDateInput.value) {
@@ -120,7 +166,6 @@ if (checkoutForm && checkoutButton && checkoutStatus) {
       ? new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1)
       : new Date(today.getFullYear(), today.getMonth(), 1);
 
-    const activitySelect = checkoutForm ? checkoutForm.querySelector('select[name="activity"]') : null;
     const availability = (typeof window !== 'undefined' && window.SKYTHRILL_AVAILABILITY) || {};
 
     function getAvailableDates() {
