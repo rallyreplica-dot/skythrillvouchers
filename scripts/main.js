@@ -12,6 +12,43 @@ const calendarDayGrid = document.querySelector('#calendar-day-grid');
 const calendarPrevButton = document.querySelector('[data-calendar-nav="prev"]');
 const calendarNextButton = document.querySelector('[data-calendar-nav="next"]');
 
+let appConfig = { demoMode: false };
+
+async function loadAppConfig() {
+  try {
+    const response = await fetch('/app-config');
+    if (!response.ok) {
+      return;
+    }
+
+    const payload = await response.json();
+    appConfig = {
+      demoMode: Boolean(payload && payload.demoMode),
+    };
+  } catch {
+    // Ignore config load failures and continue with defaults.
+  }
+}
+
+function addDemoBanner() {
+  if (!appConfig.demoMode) {
+    return;
+  }
+
+  if (document.querySelector('.demo-banner')) {
+    return;
+  }
+
+  const banner = document.createElement('p');
+  banner.className = 'demo-banner';
+  banner.textContent = 'Demo mode: no real payment will be charged.';
+
+  const formSection = document.querySelector('.voucher-form .section-header');
+  if (formSection) {
+    formSection.appendChild(banner);
+  }
+}
+
 function toIsoDate(value) {
   return value.toISOString().slice(0, 10);
 }
@@ -193,6 +230,8 @@ if (checkoutForm && checkoutButton && checkoutStatus) {
     renderCalendar();
   }
 
+  loadAppConfig().then(addDemoBanner);
+
   checkoutForm.addEventListener('submit', async (event) => {
     event.preventDefault();
 
@@ -216,7 +255,9 @@ if (checkoutForm && checkoutButton && checkoutStatus) {
     }
 
     checkoutButton.disabled = true;
-    checkoutStatus.textContent = 'Creating secure Stripe checkout...';
+    checkoutStatus.textContent = appConfig.demoMode
+      ? 'Preparing demo checkout...'
+      : 'Creating secure Stripe checkout...';
 
     try {
       const response = await fetch('/create-checkout-session', {
@@ -235,6 +276,10 @@ if (checkoutForm && checkoutButton && checkoutStatus) {
       const data = await response.json();
       if (!data.url) {
         throw new Error('Stripe checkout URL missing.');
+      }
+
+      if (data.demoMode) {
+        checkoutStatus.textContent = 'Demo order ready. Redirecting...';
       }
 
       window.location.href = data.url;

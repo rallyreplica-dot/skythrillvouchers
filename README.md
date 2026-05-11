@@ -43,6 +43,18 @@ Starter scaffold for a voucher website focused on:
 4. Open:
 	http://localhost:5500
 
+## Demo mode (no real payments)
+
+Use demo mode when presenting to clients without charging cards:
+
+1. In .env, set:
+	DEMO_MODE=true
+2. Start the app:
+	npm start
+3. Use the checkout normally.
+
+In demo mode, the app skips Stripe checkout, creates a paid demo order, generates a voucher code, and redirects to success.html.
+
 ## Stripe notes
 
 - This integration uses Stripe Checkout Sessions via POST /create-checkout-session.

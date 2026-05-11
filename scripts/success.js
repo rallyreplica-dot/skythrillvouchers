@@ -24,10 +24,13 @@ async function loadOrderStatus() {
 
     if (order.status === 'paid') {
       const voucherText = order.voucherCode ? ` Voucher code: ${order.voucherCode}.` : '';
+      const demoText = order.paymentStatus === 'demo-paid'
+        ? ' Demo order confirmed. No payment was charged.'
+        : '';
       const fulfillmentText = order.fulfillmentStatus === 'emailed'
         ? ' We have emailed the voucher details to your inbox.'
         : ' Voucher delivery is being finalized.';
-      statusText.textContent = `Payment confirmed for ${order.activity}.${voucherText}${fulfillmentText}`;
+      statusText.textContent = `Payment confirmed for ${order.activity}.${demoText}${voucherText}${fulfillmentText}`;
       return;
     }
 

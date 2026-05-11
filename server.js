@@ -20,6 +20,7 @@ const smtpUser = process.env.SMTP_USER;
 const smtpPass = process.env.SMTP_PASS;
 const smtpFromEmail = process.env.SMTP_FROM_EMAIL || supportEmail;
 const smtpFromName = process.env.SMTP_FROM_NAME || 'SkyThrill Vouchers';
+const demoMode = /^(1|true|yes)$/i.test(String(process.env.DEMO_MODE || ''));
 const dataDir = process.env.DATA_DIR
   ? path.resolve(process.env.DATA_DIR)
   : path.join(__dirname, 'data');
@@ -242,14 +243,14 @@ app.post('/stripe-webhook', express.raw({ type: 'application/json' }), async (re
 app.use(express.json());
 app.use(express.static(path.join(__dirname)));
 
+app.get('/app-config', (req, res) => {
+  return res.json({
+    demoMode,
+  });
+});
+
 app.post('/create-checkout-session', async (req, res) => {
   try {
-    if (!stripe) {
-      return res.status(500).json({
-        error: 'Stripe is not configured. Add STRIPE_SECRET_KEY to your .env file.',
-      });
-    }
-
     const {
       activity,
       amount,
@@ -268,6 +269,36 @@ app.post('/create-checkout-session', async (req, res) => {
     const host = req.get('host');
     const protocol = req.protocol;
     const origin = publicBaseUrl || `${protocol}://${host}`;
+
+    if (demoMode) {
+      const demoSessionId = `demo_${Date.now().toString(36)}${Math.random().toString(36).slice(2, 6)}`;
+      const voucherCode = generateVoucherCode();
+
+      upsertOrder(demoSessionId, {
+        status: 'paid',
+        paymentStatus: 'demo-paid',
+        activity,
+        preferredDate: preferredDate || '',
+        recipient: recipient || '',
+        message: message || '',
+        customerEmail: customerEmail || '',
+        amountTotal: amountInPence,
+        currency: 'gbp',
+        voucherCode,
+        fulfillmentStatus: 'generated',
+      });
+
+      return res.json({
+        url: `${origin}/success.html?session_id=${encodeURIComponent(demoSessionId)}`,
+        demoMode: true,
+      });
+    }
+
+    if (!stripe) {
+      return res.status(500).json({
+        error: 'Stripe is not configured. Add STRIPE_SECRET_KEY to your .env file.',
+      });
+    }
 
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
@@ -384,6 +415,9 @@ app.post('/admin/orders/:sessionId/resend-email', requireAdminAuth, async (req, 
 
 app.listen(port, () => {
   console.log(`SkyThrill running at http://localhost:${port}`);
+  if (demoMode) {
+    console.warn('Demo mode enabled: no real Stripe charge will be created.');
+  }
   if (!stripe) {
     console.warn('Stripe checkout disabled: STRIPE_SECRET_KEY is missing.');
   }
