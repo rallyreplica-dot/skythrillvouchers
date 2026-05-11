@@ -20,9 +20,12 @@ const smtpUser = process.env.SMTP_USER;
 const smtpPass = process.env.SMTP_PASS;
 const smtpFromEmail = process.env.SMTP_FROM_EMAIL || supportEmail;
 const smtpFromName = process.env.SMTP_FROM_NAME || 'SkyThrill Vouchers';
+const dataDir = process.env.DATA_DIR
+  ? path.resolve(process.env.DATA_DIR)
+  : path.join(__dirname, 'data');
 const stripe = stripeSecretKey ? new Stripe(stripeSecretKey) : null;
 const allowedAmounts = new Set([10000, 15000, 25000, 40000, 43900]);
-const ordersFilePath = path.join(__dirname, 'data', 'orders.json');
+const ordersFilePath = path.join(dataDir, 'orders.json');
 const mailTransporter = smtpHost && smtpUser && smtpPass
   ? nodemailer.createTransport({
       host: smtpHost,

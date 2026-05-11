@@ -7,10 +7,13 @@ Starter scaffold for a voucher website focused on:
 - Hot air balloon rides
 - Gliding
 - Aerobatics
+- Warbird flights
+- Flight simulator experience
 
 ## Structure
 
 - index.html: Landing page with featured bundles and starter voucher form.
+- checkout.html: Dedicated checkout page for voucher purchase flow.
 - styles/main.css: Global theme, responsive layout, and animation.
 - scripts/main.js: Mobile navigation and Stripe checkout form submit logic.
 - server.js: Express server with Stripe Checkout session endpoint.
@@ -23,6 +26,8 @@ Starter scaffold for a voucher website focused on:
 - pages/hot-air-balloon-rides.html: Hot air balloon rides category page.
 - pages/gliding.html: Gliding category page.
 - pages/aerobatics.html: Aerobatics category page.
+- pages/warbird-flights.html: Warbird flights category page.
+- pages/flight-simulator-experience.html: Flight simulator experience category page.
 - success.html: Post-payment success page.
 - cancel.html: Checkout cancel page.
 - data/orders.json: Local order status store created automatically.
@@ -90,3 +95,22 @@ Without SMTP config, voucher codes are still generated and stored in data/orders
 	- success.html shows order status
 	- voucher email sends
 	- order appears in admin dashboard
+
+## Deploy on Render
+
+1. Push this repo to GitHub.
+2. In Render, create a new Blueprint and select this repository.
+3. Render will detect render.yaml and create the web service automatically.
+4. After first deploy, set secrets in Render environment:
+	- PUBLIC_BASE_URL = your Render URL (or custom domain), for example: https://skythrill-vouchers.onrender.com
+	- STRIPE_SECRET_KEY = your Stripe secret key
+	- STRIPE_WEBHOOK_SECRET = webhook signing secret from Stripe
+	- ADMIN_API_KEY = strong random string
+	- SMTP_HOST / SMTP_PORT / SMTP_USER / SMTP_PASS / SMTP_FROM_EMAIL / SMTP_FROM_NAME
+5. In Stripe dashboard, set webhook endpoint to:
+	- https://your-domain.com/stripe-webhook
+	- Events: checkout.session.completed, checkout.session.async_payment_failed, checkout.session.expired
+
+Notes:
+- render.yaml includes a persistent disk and sets DATA_DIR to /var/data/skythrill so data/orders.json survives restarts.
+- If you add a custom domain, update PUBLIC_BASE_URL to the custom domain.

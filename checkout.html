@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout | SkyThrill Vouchers</title>
+    <meta
+      name="description"
+      content="Complete your SkyThrill voucher purchase with secure checkout."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Syne:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/main.css" />
+    <script defer src="scripts/availability.js"></script>
+    <script defer src="scripts/main.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var params = new URLSearchParams(window.location.search);
+        var activity = params.get('activity');
+        var amount = params.get('amount');
+        var preferredDate = params.get('preferredDate');
+
+        if (activity) {
+          var activitySelect = document.querySelector('select[name="activity"]');
+          if (activitySelect) {
+            var activityOption = Array.from(activitySelect.options).find(function (opt) {
+              return opt.value === activity;
+            });
+
+            if (activityOption) {
+              activitySelect.value = activityOption.value;
+            }
+          }
+        }
+
+        if (amount) {
+          var amountSelect = document.querySelector('select[name="amount"]');
+          if (amountSelect) {
+            var amountOption = Array.from(amountSelect.options).find(function (opt) {
+              return opt.value === amount;
+            });
+
+            if (amountOption) {
+              amountSelect.value = amountOption.value;
+            }
+          }
+        }
+
+        if (preferredDate) {
+          var dateInput = document.querySelector('input[name="preferredDate"]');
+          if (dateInput) {
+            dateInput.value = preferredDate;
+          }
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <div class="bg-orb orb-a"></div>
+    <div class="bg-orb orb-b"></div>
+    <div class="cloud-layer" aria-hidden="true">
+      <div class="cloud cloud-a"></div>
+      <div class="cloud cloud-b"></div>
+      <div class="cloud cloud-c"></div>
+      <div class="cloud cloud-d"></div>
+    </div>
+
+    <header class="site-header">
+      <a class="brand" href="index.html">SkyThrill</a>
+      <nav class="main-nav" aria-label="Checkout navigation">
+        <a href="index.html">Home</a>
+        <a href="index.html#experiences">Experiences</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero reveal">
+        <p class="eyebrow">Secure Checkout</p>
+        <h1>Finish your voucher in under 2 minutes.</h1>
+        <p class="hero-copy">
+          Select the activity details, choose a date, and continue to secure payment.
+        </p>
+      </section>
+
+      <section class="section voucher-form reveal">
+        <div class="section-header">
+          <h2>Start your voucher</h2>
+        </div>
+        <form id="voucher-checkout-form">
+          <label>
+            Activity
+            <select name="activity">
+              <option value="Fixed Wing Pleasure Flight">Fixed Wing Pleasure Flight</option>
+              <option value="Helicopter Pleasure Flight">Helicopter Pleasure Flight</option>
+              <option value="Microlight Pleasure Flight">Microlight Pleasure Flight</option>
+              <option value="Tandem Skydive">Tandem Skydive</option>
+              <option value="Standard WingWalk">Standard WingWalk</option>
+              <option value="Dynamic WingWalk">Dynamic WingWalk</option>
+              <option value="Aerobatic WingWalk">Aerobatic WingWalk</option>
+              <option value="Duxford WingWalk">Duxford WingWalk</option>
+              <option value="Charity WingWalk">Charity WingWalk</option>
+              <option value="Leeds East WingWalk">Leeds East WingWalk</option>
+              <option value="Sandown IOW WingWalk">Sandown IOW WingWalk</option>
+              <option value="Hot Air Balloon Ride">Hot Air Balloon Ride</option>
+              <option value="Gliding Session">Gliding Session</option>
+              <option value="Aerobatics Experience">Aerobatics Experience</option>
+              <option value="Warbird Flight">Warbird Flight</option>
+              <option value="Flight Simulator Experience">Flight Simulator Experience</option>
+              <option value="Flexible Gift Card">Flexible Gift Card</option>
+            </select>
+          </label>
+          <label>
+            Voucher value
+            <select name="amount">
+              <option value="10000">GBP 100</option>
+              <option value="15000">GBP 150</option>
+              <option value="25000">GBP 250</option>
+              <option value="40000">GBP 400</option>
+              <option value="43900">GBP 439 (Duxford)</option>
+            </select>
+          </label>
+          <label>
+            Preferred date
+            <input type="date" name="preferredDate" required />
+          </label>
+          <div class="inline-calendar" id="preferred-date-calendar" aria-label="Preferred date calendar">
+            <div class="inline-calendar__header">
+              <button type="button" class="inline-calendar__nav" data-calendar-nav="prev" aria-label="Previous month">&lt;</button>
+              <p class="inline-calendar__title" id="calendar-month-label">Month Year</p>
+              <button type="button" class="inline-calendar__nav" data-calendar-nav="next" aria-label="Next month">&gt;</button>
+            </div>
+            <div class="inline-calendar__weekdays" aria-hidden="true">
+              <span>Mon</span>
+              <span>Tue</span>
+              <span>Wed</span>
+              <span>Thu</span>
+              <span>Fri</span>
+              <span>Sat</span>
+              <span>Sun</span>
+            </div>
+            <div class="inline-calendar__days" id="calendar-day-grid" role="grid" aria-labelledby="calendar-month-label"></div>
+          </div>
+          <p class="calendar-legend"><span class="legend-swatch legend-available"></span> Available &nbsp; <span class="legend-swatch legend-unavailable"></span> Unavailable for this activity</p>
+          <label>
+            Your email
+            <input type="email" name="customerEmail" placeholder="you@example.com" required />
+          </label>
+          <label>
+            Recipient name
+            <input type="text" name="recipient" placeholder="Alex Morgan" />
+          </label>
+          <label>
+            Your message
+            <textarea name="message" rows="4" placeholder="Enjoy every second up there."></textarea>
+          </label>
+          <button id="checkout-button" type="submit" class="btn">Continue to secure payment</button>
+          <p id="checkout-status" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>SkyThrill Vouchers</p>
+      <p>Support: support@skythrill.example</p>
+    </footer>
+  </body>
+</html>

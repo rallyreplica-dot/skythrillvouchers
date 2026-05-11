@@ -118,5 +118,9 @@ window.SKYTHRILL_AVAILABILITY = {
     '2026-08-08', '2026-08-22',
   ],
 
+  'Warbird Flight': null, // open availability
+
+  'Flight Simulator Experience': null, // open availability
+
   'Flexible Gift Card': null, // no date restriction
 };

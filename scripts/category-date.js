@@ -7,7 +7,7 @@ const urlPreferredDate = urlParams.get('preferredDate');
 const storedPreferredDate = localStorage.getItem('skythrill_preferred_date');
 
 const checkoutLinks = Array.from(
-  document.querySelectorAll('a[href*="../index.html"][href*="#voucher-form"]')
+  document.querySelectorAll('a[href*="../checkout.html"], a[href*="../index.html"][href*="#voucher-form"]')
 );
 
 function withPreferredDate(baseHref, preferredDate) {
@@ -40,7 +40,7 @@ if (optionDateInputs.length > 0) {
       return;
     }
 
-    const selectLink = card.querySelector('a[href*="../index.html"][href*="#voucher-form"]');
+    const selectLink = card.querySelector('a[href*="../checkout.html"], a[href*="../index.html"][href*="#voucher-form"]');
     if (!(selectLink instanceof HTMLAnchorElement)) {
       return;
     }
